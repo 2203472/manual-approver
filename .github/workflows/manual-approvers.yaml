@@ -14,13 +14,12 @@ name: Connect to an AWS role from a GitHub repository
 
 # on: 
 #   workflow_dispatch:
-#     branches: [ naisha-onboarding ] 
+#     branches: [ naisha-onboarding ]
+# Comment
 
 on:
   push:
-    branches: [ naisha-onboarding ]
-  pull_request:
-    branches: [ naisha-onboarding ]
+    branches: master
   workflow_dispatch:
 
 
@@ -43,13 +42,13 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v4
       - name: Test manual Approvers
-        uses: trstringer/manual-approval@v1
+        uses: trstringer/manual-approval@v1.9.0
         with:
-          secret: ${{ github.TOKEN }}
-          approvers: ${{ github.actor }}
+          secret: ${{ secrets.ACTIONS_PAT }}
+          approvers: amihan-nramirez,2203472
           minimum-approvals: 1
           issue-title: "Deploying v1.3.5 to prod from staging"
-          issue-body: "Please approve or deny the deployment of version v1.3.5."
+          issue-body: "Please approve or deny the deployment of version v1.3.5. @amihan-nramirez @2203472"
           exclude-workflow-initiator-as-approver: false
           additional-approved-words: ''
           additional-denied-words: ''
